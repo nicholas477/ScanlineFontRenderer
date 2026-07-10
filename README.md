@@ -11,8 +11,11 @@ The scanline sweeper method does not suffer from this limitation, as it rasteriz
 
 See the screenshots below for a quality comparison. The top text is Unreal's built in text render component, the bottom is the ScanlineTextRenderComponent.
 
-![Alt text](Comparison/comparison_1.png?raw=true "Comparison 1")
-![Alt text](Comparison/comparison_2.png?raw=true "Comparison 2")
+From far away, the text quality is similar.
+![Alt text](Comparison/comparison_1.png "Comparison 1")
+
+Up close you can see how the ScanlineTextRenderComponent retains detail.
+![Alt text](Comparison/comparison_2.png "Comparison 2")
 
 # License
 The shader code in Shaders/Private/ScanlineFontCommon.ush is licensed under the Mozilla Public License. Everything else is licensed under the MIT license.
