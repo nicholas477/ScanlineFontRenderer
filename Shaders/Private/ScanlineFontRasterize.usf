@@ -1,0 +1,45 @@
+#include "/Engine/Public/Platform.ush"
+#include "/Plugin/ScanlineFontRenderer/Private/ScanlineFontCommon.ush"
+
+float3 RasterizeScanlineFont(
+    float2 TextureUV,
+    float2 GlyphUV,
+    float2 Offset,
+    Texture2D CurveTexture,
+    SamplerState CurveSampler,
+    int2 CurveTextureSize,
+    Texture2D IndexTexture,
+    SamplerState IndexSampler
+)
+{
+    // Indicies into curves start, curve end in CurveTexture
+    float4 GlyphData = Texture2DSample(IndexTexture, IndexSampler, GlyphUV);
+    
+    int2 CurveStartCurveEnd = round(GlyphData.rg);
+    
+    float2 GlyphSize = GlyphData.ba;
+    float2 WindowSize = fwidth(TextureUV) * GlyphSize;
+
+    float Amount = 0.0;
+    for (int CurveIndex = CurveStartCurveEnd.r; CurveIndex < CurveStartCurveEnd.g; ++CurveIndex)
+    {
+        float2 UV1 = Tile1Dto2D(CurveTextureSize.r, (CurveIndex * 2)) + float2(0.5, 0.5);
+        float2 UV2 = Tile1Dto2D(CurveTextureSize.r, (CurveIndex * 2) + 1.0) + float2(0.5, 0.5);
+        
+        UV1 /= (float2)CurveTextureSize;
+        UV2 /= (float2)CurveTextureSize;
+        
+        float4 Curve012 = Texture2DSample(CurveTexture, CurveSampler, UV1).rgba;
+        float4 Curve345 = Texture2DSample(CurveTexture, CurveSampler, UV2).rgba;
+        
+        //float scanline_sweep(
+        //    float2 size,
+        //    float2 offset,
+        //    float2 p0,
+        //    float2 p1,
+        //    float2 p2)
+        Amount += scanline_sweep(WindowSize, Offset, Curve012.rg, float2(Curve012.b, Curve345.r), Curve345.gb);
+    }
+
+    return Amount / (WindowSize.r * WindowSize.g);
+}
