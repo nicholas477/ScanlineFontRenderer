@@ -27,6 +27,7 @@ public class ScanlineFontRendererEditor : ModuleRules
                 "ContentBrowser",
                 "ToolMenus",
                 "ScanlineFontRenderer",
+                "PropertyEditor",
             }
             );
     }

@@ -12,6 +12,8 @@
 #include "ContentBrowserMenuContexts.h"
 #include "ToolMenus.h"
 #include "AssetRegistry/AssetRegistryModule.h"
+#include "PropertyEditorModule.h"
+#include "Toolkits/AssetEditorToolkitMenuContext.h"
 
 #define LOCTEXT_NAMESPACE "FScanlineFontRendererEditorModule"
 
@@ -19,6 +21,7 @@ void FScanlineFontRendererEditorModule::StartupModule()
 {
 	RegisterAssetTypeActions();
 	RegisterMenuExtensions();
+	RegisterDetailsCustomizations();
 }
 
 void FScanlineFontRendererEditorModule::ShutdownModule()
@@ -126,6 +129,56 @@ void FScanlineFontRendererEditorModule::UnregisterMenuExtensions()
 		UToolMenus::Get()->RemoveMenu("ContentBrowser.AssetContextMenu.FontFace");
 	}
 }
+
+void FScanlineFontRendererEditorModule::RegisterDetailsCustomizations()
+{
+	// Register asset editor toolbar extension
+	if (!UToolMenus::IsToolMenuUIEnabled())
+	{
+		return;
+	}
+
+	UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu("AssetEditor.DefaultToolBar");
+	if (ToolbarMenu)
+	{
+		FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("Asset");
+		Section.AddDynamicEntry("ScanlineFontFaceRebuild", FNewToolMenuSectionDelegate::CreateLambda([](FToolMenuSection& InSection)
+		{
+			// Check if we're editing a ScanlineFontFace
+			if (UAssetEditorToolkitMenuContext* MenuContext = InSection.FindContext<UAssetEditorToolkitMenuContext>())
+			{
+				if (MenuContext->Toolkit.IsValid())
+				{
+					const TArray<UObject*>* EditedObjects = MenuContext->Toolkit.Pin()->GetObjectsCurrentlyBeingEdited();
+					if (EditedObjects)
+					{
+						for (UObject* Object : *EditedObjects)
+						{
+							if (UScanlineFontFace* FontFace = Cast<UScanlineFontFace>(Object))
+							{
+								InSection.AddEntry(FToolMenuEntry::InitToolBarButton(
+									"RebuildFont",
+									FUIAction(FExecuteAction::CreateLambda([FontFace]()
+									{
+										if (FontFace)
+										{
+											FontFace->ImportFromFontFace(FontFace->SourceFontFace.LoadSynchronous());
+										}
+									})),
+									LOCTEXT("RebuildFont", "Rebuild Font"),
+									LOCTEXT("RebuildFontTooltip", "Rebuild the scanline font from the source font face."),
+									FSlateIcon(FAppStyle::GetAppStyleSetName(), "Icons.Refresh")
+								));
+								break;
+							}
+						}
+					}
+				}
+			}
+		}));
+	}
+}
+
 
 #undef LOCTEXT_NAMESPACE
 

@@ -25,6 +25,12 @@ private:
 	/** Unregister context menu extensions */
 	void UnregisterMenuExtensions();
 
+	/** Register details customizations */
+	void RegisterDetailsCustomizations();
+
+	/** Unregister details customizations */
+	void UnregisterDetailsCustomizations();
+
 	/** Array of registered asset type actions */
 	TArray<TSharedPtr<class IAssetTypeActions>> RegisteredAssetTypeActions;
 

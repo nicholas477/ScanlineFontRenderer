@@ -286,6 +286,7 @@ void UScanlineFontFace::Clear()
 {
 	Glyphs.Empty();
 	CodePointToIndex.Empty();
+	CodePointToTextureIndex.Empty();
 	CurveDataTexture = nullptr;
 	GlyphIndexTexture = nullptr;
 }
@@ -374,7 +375,6 @@ bool UScanlineFontFace::ImportFromFontFace(UFontFace* FontFace, float FontSize)
 	// Clear existing glyphs
 	Clear();
 
-	// Import common ASCII range (32-126) plus extended ASCII (160-255)
 	TArray<int32> CodePointsToImport;
 	for (const TCHAR Char : CharactersToImport)
 	{
