@@ -199,6 +199,11 @@ class SCANLINEFONTRENDERER_API UScanlineFontFace : public UObject
 	GENERATED_BODY()
 
 public:
+	UScanlineFontFace(const FObjectInitializer& ObjectInitializer);
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Font")
+	FString CharactersToImport;
+
 	/** Font family name */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Font")
 	FString FamilyName;

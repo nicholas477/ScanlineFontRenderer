@@ -156,6 +156,19 @@ void FScanlineFontGlyph::Scale(float ScaleFactor)
 
 // UScanlineFontFace implementation
 
+UScanlineFontFace::UScanlineFontFace(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+	for (int32 CodePoint = 32; CodePoint <= 126; CodePoint++)
+	{
+		CharactersToImport.AppendChar((TCHAR)CodePoint);
+	}
+	for (int32 CodePoint = 160; CodePoint <= 255; CodePoint++)
+	{
+		CharactersToImport.AppendChar((TCHAR)CodePoint);
+	}
+}
+
 bool UScanlineFontFace::GetGlyph(int32 CodePoint, FScanlineFontGlyph& OutGlyph) const
 {
 	const FScanlineFontGlyph* Found = Glyphs.Find(CodePoint);
@@ -363,13 +376,9 @@ bool UScanlineFontFace::ImportFromFontFace(UFontFace* FontFace, float FontSize)
 
 	// Import common ASCII range (32-126) plus extended ASCII (160-255)
 	TArray<int32> CodePointsToImport;
-	for (int32 CodePoint = 32; CodePoint <= 126; CodePoint++)
+	for (const TCHAR Char : CharactersToImport)
 	{
-		CodePointsToImport.Add(CodePoint);
-	}
-	for (int32 CodePoint = 160; CodePoint <= 255; CodePoint++)
-	{
-		CodePointsToImport.Add(CodePoint);
+		CodePointsToImport.AddUnique(static_cast<int32>(Char));
 	}
 
 	int32 ImportedCount = 0;
