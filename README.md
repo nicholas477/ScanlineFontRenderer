@@ -9,5 +9,10 @@ Compared to Unreal's built-in 3d text rendering method (signed distance field te
 
 The scanline sweeper method does not suffer from this limitation, as it rasterizes the text per-pixel on screen using the font's original vector graphics. The downside of the scanline sweeper implementation is a **much higher** rendering cost per-pixel compared to the trivial rendering cost of the signed distance field method. This rendering cost is also dependent on the font's complexity (number of curves), whereas signed distance fields have a trivial and constant cost to render independent of font complexity.
 
+See the screenshots below for a quality comparison. The top text is Unreal's built in text render component, the bottom is the ScanlineTextRenderComponent.
+
+![Alt text](Comparison/comparison_1.png?raw=true "Comparison 1")
+![Alt text](Comparison/comparison_2.png?raw=true "Comparison 2")
+
 # License
 The shader code in Shaders/Private/ScanlineFontCommon.ush is licensed under the Mozilla Public License. Everything else is licensed under the MIT license.
