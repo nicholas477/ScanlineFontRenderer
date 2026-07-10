@@ -1,7 +1,7 @@
 #include "/Engine/Public/Platform.ush"
 #include "/Plugin/ScanlineFontRenderer/Private/ScanlineFontCommon.ush"
 
-float3 RasterizeScanlineFont(
+float RasterizeScanlineFont(
     float2 TextureUV,
     float2 GlyphUV,
     float2 Offset,
