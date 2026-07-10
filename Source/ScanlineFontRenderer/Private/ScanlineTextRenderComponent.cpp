@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Nicholas Chalkley. All Rights Reserved.
 
 #include "ScanlineTextRenderComponent.h"
 #include "ScanlineTextRenderSceneProxy.h"
@@ -8,7 +8,7 @@
 #include "ScanlineTextRenderSceneProxyUtils.h"
 #include "Engine/Engine.h"
 
-UE_DISABLE_OPTIMIZATION
+
 
 UScanlineTextRenderComponent::UScanlineTextRenderComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -357,4 +357,4 @@ void UScanlineTextRenderComponent::UpdateDynamicMaterialInstance()
 	}
 }
 
-UE_ENABLE_OPTIMIZATION
+

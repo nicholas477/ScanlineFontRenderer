@@ -1,11 +1,11 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Nicholas Chalkley. All Rights Reserved.
 
 #include "ScanlineFontFaceUtils.h"
 
 #include "ScanlineFontFace.h"
 #include "Engine/Texture2D.h"
 
-UE_DISABLE_OPTIMIZATION
+
 
 #if WITH_EDITOR
 #include "Engine/FontFace.h"
@@ -425,4 +425,3 @@ namespace ScanlineFontFaceUtils
 
 #endif 
 
-UE_ENABLE_OPTIMIZATION

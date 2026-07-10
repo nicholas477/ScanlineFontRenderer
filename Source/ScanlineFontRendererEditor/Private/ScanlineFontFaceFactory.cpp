@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Nicholas Chalkley. All Rights Reserved.
 
 #include "ScanlineFontFaceFactory.h"
 #include "ScanlineFontFace.h"

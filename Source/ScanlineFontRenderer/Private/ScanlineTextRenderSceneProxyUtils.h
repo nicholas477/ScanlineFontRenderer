@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Nicholas Chalkley. All Rights Reserved.
 
 #pragma once
 
@@ -8,7 +8,7 @@
 #include "Engine/Engine.h"
 #include "Engine/Font.h"
 
-UE_DISABLE_OPTIMIZATION
+
 
 namespace
 {
@@ -233,4 +233,4 @@ namespace
 	//}
 }
 
-UE_ENABLE_OPTIMIZATION
+

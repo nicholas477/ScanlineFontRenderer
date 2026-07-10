@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Nicholas Chalkley. All Rights Reserved.
 
 #include "ScanlineFontFace.h"
 #include "ScanlineFontFaceUtils.h"
@@ -20,7 +20,7 @@ FOnScanlineFontFacePropertyChanged UScanlineFontFace::OnPropertyChanged;
 #endif // WITH_FREETYPE
 #endif // WITH_EDITOR
 
-UE_DISABLE_OPTIMIZATION
+
 
 FBox2D FScanlineQuadraticBezier::GetBounds() const
 {
@@ -519,4 +519,4 @@ int32 UScanlineFontFace::ImportCodePointsFromFontFace(UFontFace* FontFace, const
 #endif // WITH_FREETYPE
 #endif // WITH_EDITOR
 
-UE_ENABLE_OPTIMIZATION
+

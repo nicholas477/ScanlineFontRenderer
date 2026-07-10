@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Nicholas Chalkley. All Rights Reserved.
 
 #include "ScanlineTextRenderSceneProxy.h"
 #include "ScanlineTextRenderSceneProxyUtils.h"
@@ -10,7 +10,7 @@
 #include "Materials/MaterialInterface.h"
 #include "PrimitiveViewRelevance.h"
 
-UE_DISABLE_OPTIMIZATION
+
 
 FScanlineTextRenderSceneProxy::FScanlineTextRenderSceneProxy(UScanlineTextRenderComponent* Component)
 	: FPrimitiveSceneProxy(Component)
@@ -417,4 +417,4 @@ void FScanlineTextRenderSceneProxy::BuildGlyphMesh(
 	OutIndices.Add(V11);
 }
 
-UE_ENABLE_OPTIMIZATION
+

@@ -1,3 +1,5 @@
+// Copyright Nicholas Chalkley. All Rights Reserved.
+
 #include "/Engine/Public/Platform.ush"
 #include "/Plugin/ScanlineFontRenderer/Private/ScanlineFontCommon.ush"
 
